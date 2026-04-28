@@ -43,6 +43,7 @@ int graph[4][4] = {
     {6, 4, 0, 2},
     {7, 5, 2, 0}
 };
+
 vector<Ambulance> ambulances;
 
 // ---------------- HELPERS ----------------
@@ -106,4 +107,47 @@ void addEmergency() {
     totalAdded++;
 
     cout << "Emergency Added! ID: " << e.id << endl;
+}
+
+
+void assignAmbulance() {
+    if (pq.empty()) {
+        cout << "No emergencies!\n";
+        return;
+    }
+
+    Emergency e = pq.top();
+    pq.pop();
+
+    int bestIdx = -1;
+    int minDist = INT_MAX;
+
+    for (int i = 0; i < ambulances.size(); i++) {
+        if (ambulances[i].available) {
+            int d = getDistance(ambulances[i].area, e.area);
+            if (d < minDist) {
+                minDist = d;
+                bestIdx = i;
+            }
+        }
+    }
+
+    if (bestIdx == -1) {
+        cout << "No ambulance available!\n";
+        pq.push(e);
+        return;
+    }
+
+    undoStack.push(ambulances[bestIdx]);
+
+    ambulances[bestIdx].available = false;
+    ambulances[bestIdx].area = e.area;
+
+    completed.push_back(e);
+    totalHandled++;
+
+    cout << "\nDispatch Successful\n";
+    cout << "Ambulance ID: " << ambulances[bestIdx].id << endl;
+    cout << "Hospital: " << ambulances[bestIdx].hospital << endl;
+    cout << "Distance: " << minDist << " km\n";
 }
