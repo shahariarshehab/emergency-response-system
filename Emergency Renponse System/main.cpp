@@ -253,3 +253,24 @@ void showPending() {
         cout << "|    " << e.severity << "\n";
     }
 }
+
+void showCompleted() {
+    if (completed.empty()) {
+        cout << "No completed emergencies!\n";
+        return;
+    }
+
+    cout << "\n========== COMPLETED ==========\n";
+    cout << "ID   | Area       | Severity\n";
+    cout << "-----+------------+---------\n";
+
+    for (auto &e : completed) {
+        cout << e.id;
+        for (int j = to_string(e.id).length(); j < 5; j++) cout << " ";
+
+        cout << "| " << e.area;
+        for (int j = e.area.length(); j < 10; j++) cout << " ";
+
+        cout << "|    " << e.severity << "\n";
+    }
+}
