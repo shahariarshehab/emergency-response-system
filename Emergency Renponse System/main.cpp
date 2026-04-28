@@ -227,3 +227,29 @@ void showHospitalStatus() {
              << "  |   " << stats[h].second << "\n";
     }
 }
+
+void showPending() {
+    if (pq.empty()) {
+        cout << "No pending emergencies!\n";
+        return;
+    }
+
+    auto temp = pq;
+
+    cout << "\n=========== PENDING ===========\n";
+    cout << "ID   | Area       | Severity\n";
+    cout << "-----+------------+---------\n";
+
+    while (!temp.empty()) {
+        Emergency e = temp.top();
+        temp.pop();
+
+        cout << e.id;
+        for (int i = to_string(e.id).length(); i < 5; i++) cout << " ";
+
+        cout << "| " << e.area;
+        for (int i = e.area.length(); i < 10; i++) cout << " ";
+
+        cout << "|    " << e.severity << "\n";
+    }
+}
