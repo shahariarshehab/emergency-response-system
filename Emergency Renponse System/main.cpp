@@ -151,3 +151,79 @@ void assignAmbulance() {
     cout << "Hospital: " << ambulances[bestIdx].hospital << endl;
     cout << "Distance: " << minDist << " km\n";
 }
+// ---------------- FIXED RETURN ----------------
+
+void returnAmbulance() {
+    int id;
+    cout << "Enter Ambulance ID: ";
+    cin >> id;
+
+    for (int i = 0; i < ambulances.size(); i++) {
+        if (ambulances[i].id == id) {
+
+            if (ambulances[i].available) {
+                cout << "Ambulance " << id << " is already FREE!\n";
+                return;
+            }
+
+            ambulances[i].available = true;
+            ambulances[i].area = ambulances[i].baseArea;
+
+            cout << "Ambulance " << id << " returned to "
+                 << ambulances[i].baseArea << endl;
+            return;
+        }
+    }
+
+    cout << "Ambulance not found!\n";
+}
+
+// ---------------- DISPLAY ----------------
+
+void showAmbulances() {
+    cout << "\n============================================\n";
+    cout << "            AMBULANCE DETAILS\n";
+    cout << "============================================\n\n";
+
+    cout << "ID   | Hospital   | Area       | Status\n";
+    cout << "-----+------------+------------+--------\n";
+
+    for (int i = 0; i < ambulances.size(); i++) {
+        string status = ambulances[i].available ? "FREE" : "BUSY";
+
+        cout << ambulances[i].id;
+        for (int j = to_string(ambulances[i].id).length(); j < 5; j++) cout << " ";
+
+        cout << "| " << ambulances[i].hospital;
+        for (int j = ambulances[i].hospital.length(); j < 10; j++) cout << " ";
+
+        cout << "| " << ambulances[i].area;
+        for (int j = ambulances[i].area.length(); j < 10; j++) cout << " ";
+
+        cout << "| " << status << "\n";
+    }
+}
+
+void showHospitalStatus() {
+    string hospitals[] = {"DMC", "SQUARE", "APOLLO", "LABAID"};
+    map<string, pair<int,int>> stats;
+
+    for (auto &a : ambulances) {
+        if (a.available) stats[a.hospital].first++;
+        else stats[a.hospital].second++;
+    }
+
+    cout << "\n=========== HOSPITAL STATUS ===========\n";
+    cout << "Hospital     | Free | Busy\n";
+    cout << "-------------+------+------\n";
+
+    for (int i = 0; i < 4; i++) {
+        string h = hospitals[i];
+
+        cout << h;
+        for (int j = h.length(); j < 12; j++) cout << " ";
+
+        cout << "|   " << stats[h].first
+             << "  |   " << stats[h].second << "\n";
+    }
+}
