@@ -274,3 +274,75 @@ void showCompleted() {
         cout << "|    " << e.severity << "\n";
     }
 }
+
+void showStats() {
+    cout << "\n========= SYSTEM STATS =========\n";
+    cout << "Total: " << totalAdded << endl;
+    cout << "Handled: " << totalHandled << endl;
+    cout << "Pending: " << (totalAdded - totalHandled) << endl;
+}
+
+// ---------------- UNDO ----------------
+
+void undo() {
+    if (undoStack.empty()) {
+        cout << "Nothing to undo!\n";
+        return;
+    }
+
+    Ambulance last = undoStack.top();
+    undoStack.pop();
+
+    for (auto &a : ambulances) {
+        if (a.id == last.id) {
+            a = last;
+            break;
+        }
+    }
+
+    if (!completed.empty()) {
+        completed.pop_back();
+        totalHandled--;
+    }
+
+    cout << "Undo successful\n";
+}
+
+// ---------------- MAIN ----------------
+
+int main() {
+    initSystem();
+
+    int choice;
+
+    while (true) {
+        cout << "\n==== EMERGENCY SYSTEM ====\n";
+        cout << "1. Add Emergency\n";
+        cout << "2. Assign Ambulance\n";
+        cout << "3. Show All Ambulances\n";
+        cout << "4. Hospital Status\n";
+        cout << "5. Pending Emergencies\n";
+        cout << "6. Completed Emergencies\n";
+        cout << "7. System Stats\n";
+        cout << "8. Undo\n";
+        cout << "9. Return Ambulance\n";
+        cout << "10. Exit\n";
+        cout << "Choice: ";
+
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addEmergency(); break;
+            case 2: assignAmbulance(); break;
+            case 3: showAmbulances(); break;
+            case 4: showHospitalStatus(); break;
+            case 5: showPending(); break;
+            case 6: showCompleted(); break;
+            case 7: showStats(); break;
+            case 8: undo(); break;
+            case 9: returnAmbulance(); break;
+            case 10: return 0;
+            default: cout << "Invalid choice!\n";
+        }
+    }
+}
