@@ -1,5 +1,5 @@
-# 🎓Emergency Response System
-## 👥 Team Members
+# Emergency Response System
+## Team Members
 
 - **Md. Shaharia Islam** (ID: 20255103200)  
 - **Inteshar Al Islam** (ID: 20255103168)  
