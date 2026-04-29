@@ -117,7 +117,7 @@ g++ main.cpp -o emergency
 This project demonstrates how multiple data structures can be integrated to build an efficient and realistic emergency response system.
 
 
-## 📄 Report
+##  Report
 
 
 The full project report is included in this repository as Emergency_Response_System_Report.pdf
