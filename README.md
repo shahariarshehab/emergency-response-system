@@ -91,8 +91,7 @@ g++ main.cpp -o emergency
  Emergency-Response-System
  ┣  main.cpp
  ┣  README.md
- ┣  Emergency_Response_System_Report.pdf
- ┗  (Other source files if added)
+ ┗  Emergency_Response_System_Report.pdf
 ```
 
 
