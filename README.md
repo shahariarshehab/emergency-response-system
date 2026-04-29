@@ -3,7 +3,7 @@
 
 - **Md. Shaharia Islam** (ID: 20255103200)  
 - **Inteshar Al Islam** (ID: 20255103168)  
-- **Mujtahid Islam Abir** (ID: 20255103177)  
+- **Md. Muztahid Islam Abir** (ID: 20255103177)  
 
 ##  Overview
 
